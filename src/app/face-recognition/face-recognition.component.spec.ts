@@ -1,39 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { FaceRecognitionComponent } from './face-recognition.component';
 
-@Component({
-  selector: 'app-face-recognition',
-  templateUrl: './face-recognition.component.html',
-  styleUrls: ['./face-recognition.component.css']
-})
-export class FaceRecognitionComponent implements OnInit {
-  endpoint = 'https://facerecogition.cognitiveservices.azure.com/';
-  subscriptionKey = 'fbeb38cdb00f41469390fac60a85e4a8';
+describe('FaceRecognitionComponent', () => {
+  let component: FaceRecognitionComponent;
+  let fixture: ComponentFixture<FaceRecognitionComponent>;
+  let httpMock: HttpTestingController;
 
-  constructor(private http: HttpClient) { }
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      declarations: [FaceRecognitionComponent]
+    }).compileComponents();
+  });
 
-  ngOnInit() {
-    // Initialize your component
-  }
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FaceRecognitionComponent);
+    component = fixture.componentInstance;
+    httpMock = TestBed.inject(HttpTestingController);
+    fixture.detectChanges();
+  });
 
-  uploadImage(event: any) {
-    const file = event.target.files[0];
-    const formData = new FormData();
-    formData.append('image', file, file.name);
+  afterEach(() => {
+    httpMock.verify();
+  });
 
-    this.http.post<any>(`${this.endpoint}/detect?returnFaceId=true&returnFaceAttributes=age,gender`, formData, {
-      headers: {
-        'Content-Type': 'application/octet-stream',
-        'Ocp-Apim-Subscription-Key': this.subscriptionKey
-      }
-    }).subscribe(
-      (response) => {
-        // Handle the response from the API
-        console.log(response);
-      },
-      (error) => {
-        console.error('Error detecting faces:', error);
-      }
-    );
-  }
-}
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should handle image upload and API response', () => {
+    const mockFile = new File(['sample'], 'sample.png', { type: 'image/png' });
+    const mockEvent = { target: { files: [mockFile] } };
+
+    component.onImageUpload(mockEvent);
+
+    const request = httpMock.expectOne(`${component.endpoint}/detect?returnFaceId=true&returnFaceAttributes=age,gender`);
+    expect(request.request.method).toBe('POST');
+
+    request.flush([{ faceId: '1', faceAttributes: { age: 25, gender: 'male' } }]);
+
+    expect(component.detectedFaces.length).toBe(1);
+    expect(component.detectedFaces[0].faceId).toBe('1');
+    expect(component.detectedFaces[0].faceAttributes.age).toBe(25);
+    expect(component.detectedFaces[0].faceAttributes.gender).toBe('male');
+  });
+
+  it('should handle API error', () => {
+    const mockFile = new File(['sample'], 'sample.png', { type: 'image/png' });
+    const mockEvent = { target: { files: [mockFile] } };
+
+    component.onImageUpload(mockEvent);
+
+    const request = httpMock.expectOne(`${component.endpoint}/detect?returnFaceId=true&returnFaceAttributes=age,gender`);
+    expect(request.request.method).toBe('POST');
+
+    const errorResponse = { message: 'Internal Server Error' };
+    request.error(new ErrorEvent('Network error', { error: errorResponse }));
+
+    expect(component.detectedFaces.length).toBe(0);
+    expect(console.error).toHaveBeenCalledWith('Error detecting faces:', errorResponse);
+  });
+});

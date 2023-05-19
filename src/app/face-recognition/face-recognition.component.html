@@ -1,1 +1,15 @@
-<p>face-recognition works!</p>
+<input type="file" (change)="onImageUpload($event)" />
+<div *ngFor="let face of detectedFaces" class="face-card">
+  <img
+    [src]="face.faceRectangle?.top"
+    [style.width.px]="face.faceRectangle?.width"
+    [style.height.px]="face.faceRectangle?.height"
+  />
+  <p>Age: {{ face.faceAttributes?.age }}</p>
+  <p>Gender: {{ face.faceAttributes?.gender }}</p>
+</div>
+
+<hr />
+
+<input type="file" (change)="onTrainingUpload($event)" />
+<button (click)="onTrainingUpload($event)">Upload for Training</button>
