@@ -1,15 +1,16 @@
-<input type="file" (change)="onImageUpload($event)" />
-<div *ngFor="let face of detectedFaces" class="face-card">
-  <img
-    [src]="face.faceRectangle?.top"
-    [style.width.px]="face.faceRectangle?.width"
-    [style.height.px]="face.faceRectangle?.height"
-  />
-  <p>Age: {{ face.faceAttributes?.age }}</p>
-  <p>Gender: {{ face.faceAttributes?.gender }}</p>
+<div class="container">
+  <h2>Face Recognition</h2>
+
+  <div class="upload-section">
+    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+    <button (click)="submit()">Submit</button>
+  </div>
+
+  <div *ngIf="imageUrl" class="media-section">
+    <img [src]="imageUrl" alt="Uploaded Image" class="uploaded-image" />
+    <div class="description-section">
+      <p>{{ description }}</p>
+      <!-- Add additional data about the recognized person or any other relevant information here -->
+    </div>
+  </div>
 </div>
-
-<hr />
-
-<input type="file" (change)="onTrainingUpload($event)" />
-<button (click)="onTrainingUpload($event)">Upload for Training</button>

@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .upload-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .upload-section input[type="file"] {
+    margin-right: 10px;
+  }
+  
+  .upload-section button {
+    padding: 10px 20px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .media-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .media-section img {
+    max-width: 400px;
+    max-height: 400px;
+    margin-bottom: 10px;
+  }
+  
+  .media-section .description-section textarea {
+    width: 400px;
+    height: 80px;
+    padding: 10px;
+    resize: none;
+  }
+  
+  .uploaded-image {
+    max-width: 400px;
+    max-height: 400px;
+  }
+  
