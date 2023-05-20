@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <h2>Face Recognition</h2>
 
   <div class="upload-section">
@@ -6,11 +6,40 @@
     <button (click)="submit()">Submit</button>
   </div>
 
-  <div *ngIf="imageUrl" class="media-section">
-    <img [src]="imageUrl" alt="Uploaded Image" class="uploaded-image" />
+  <div class="media-section">
+    <img [src]="imageUrl" *ngIf="imageUrl" alt="Uploaded Image" />
     <div class="description-section">
-      <p>{{ description }}</p>
-      <!-- Add additional data about the recognized person or any other relevant information here -->
+      
+      <div *ngFor="let face of faceData">
+        <p>Face Info: {{ faceData }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+  <h2>Face Recognition</h2>
+
+  <div class="upload-section">
+    <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*" /> -->
+    <button (click)="submit()">Submit</button>
+  </div>
+
+  <div class="media-section">
+    <img [src]="imageUrl" *ngIf="imageUrl" alt="Uploaded Image" />
+    <div class="description-section">
+      <div *ngFor="let face of faceData">
+        <p>Face Info:</p>
+        <p>Face Rectangle: {{ face.faceRectangle | json }}</p>
+        <p>Glasses: {{ face.glasses }}</p>
+        <p>Headpose: {{ face.headpose | json }}</p>
+        <p>Noise: {{ face.noise | json }}</p>
+        <p>Blur: {{ face.blur | json }}</p>
+        <p>Exposure: {{ face.exposure | json }}</p>
+        <p>Occulsion: {{ face.occulsion | json }}</p>
+        <p>Accessories: {{ face.accessories | json }}</p>
+        <hr />
+      </div>
     </div>
   </div>
 </div>
