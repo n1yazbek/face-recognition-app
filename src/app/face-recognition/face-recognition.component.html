@@ -1,44 +1,42 @@
-<!-- <div class="container">
-  <h2>Face Recognition</h2>
-
-  <div class="upload-section">
-    <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-    <button (click)="submit()">Submit</button>
-  </div>
-
-  <div class="media-section">
-    <img [src]="imageUrl" *ngIf="imageUrl" alt="Uploaded Image" />
-    <div class="description-section">
-      
-      <div *ngFor="let face of faceData">
-        <p>Face Info: {{ faceData }}</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container">
-  <h2>Face Recognition</h2>
+  <h2 class="title">Face Recognition</h2>
 
   <div class="upload-section">
     <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*" /> -->
-    <button (click)="submit()">Submit</button>
+    <button class="submit-btn" (click)="submit()">Submit</button>
   </div>
 
   <div class="media-section">
-    <img [src]="imageUrl" *ngIf="imageUrl" alt="Uploaded Image" />
+    <img
+      class="uploaded-image"
+      [src]="imageUrl"
+      *ngIf="imageUrl"
+      alt="Uploaded Image"
+    />
     <div class="description-section">
-      <div *ngFor="let face of faceData">
-        <p>Face Info:</p>
-        <p>Face Rectangle: {{ face.faceRectangle | json }}</p>
-        <p>Glasses: {{ face.glasses }}</p>
-        <p>Headpose: {{ face.headpose | json }}</p>
-        <p>Noise: {{ face.noise | json }}</p>
-        <p>Blur: {{ face.blur | json }}</p>
-        <p>Exposure: {{ face.exposure | json }}</p>
-        <p>Occulsion: {{ face.occulsion | json }}</p>
-        <p>Accessories: {{ face.accessories | json }}</p>
-        <hr />
+      <div *ngFor="let face of faceData" class="face-info">
+        <p class="info-title">Face Info:</p>
+        <p>
+          <span class="attribute">Face Rectangle:</span>
+          {{ face.faceRectangle | json }}
+        </p>
+        <p><span class="attribute">Glasses:</span> {{ face.glasses }}</p>
+        <p>
+          <span class="attribute">Headpose:</span> {{ face.headpose | json }}
+        </p>
+        <p><span class="attribute">Noise:</span> {{ face.noise | json }}</p>
+        <p><span class="attribute">Blur:</span> {{ face.blur | json }}</p>
+        <p>
+          <span class="attribute">Exposure:</span> {{ face.exposure | json }}
+        </p>
+        <p>
+          <span class="attribute">Occulsion:</span> {{ face.occulsion | json }}
+        </p>
+        <p>
+          <span class="attribute">Accessories:</span>
+          {{ face.accessories | json }}
+        </p>
+        <hr class="divider" />
       </div>
     </div>
   </div>

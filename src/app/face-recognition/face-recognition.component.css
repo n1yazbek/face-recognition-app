@@ -1,49 +1,68 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .upload-section {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .upload-section input[type="file"] {
-    margin-right: 10px;
-  }
-  
-  .upload-section button {
-    padding: 10px 20px;
-    background-color: #2196f3;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .media-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .media-section img {
-    max-width: 400px;
-    max-height: 400px;
-    margin-bottom: 10px;
-  }
-  
-  .media-section .description-section textarea {
-    width: 400px;
-    height: 80px;
-    padding: 10px;
-    resize: none;
-  }
-  
-  .uploaded-image {
-    max-width: 400px;
-    max-height: 400px;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+}
+
+.upload-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.media-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.uploaded-image {
+  max-width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.description-section {
+  width: 100%;
+}
+
+.face-info {
+  margin-bottom: 20px;
+}
+
+.info-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.attribute {
+  font-weight: bold;
+}
+
+.divider {
+  margin: 10px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}

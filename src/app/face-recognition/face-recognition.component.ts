@@ -29,13 +29,15 @@ export class FaceRecognitionComponent {
   // imageUrl= 'https://drive.google.com/uc?export=download&id=1CZwUkA8qArdMVyI_Hk0ifWzXHXSFPOCo';
   // imageUrl= 'https://drive.google.com/uc?export=download&id=1o-mLs8lvuPSbrlLRPyVLw1UqZwMGZIk5';
   // imageUrl= 'https://drive.google.com/uc?export=download&id=1UCMGZwJp7PNvmpvUvz5oTkEArnjSDtpq';
-  imageUrl= 'https://drive.google.com/uc?export=download&id=1WToRd6qp36r2BcyHbtP0HRK1CLu5IuL0';
+  // imageUrl= 'https://drive.google.com/uc?export=download&id=1WToRd6qp36r2BcyHbtP0HRK1CLu5IuL0';
+  imageUrl = 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg'
   // imageUrl= 'https://drive.google.com/uc?export=download&id=1UCMGZwJp7PNvmpvUvz5oTkEArnjSDtpq';
   //https://drive.google.com/file/d/10c8MOV0IAAiODuillP2V-EeJrMoY8G1P/view?usp=sharing
   //https://drive.google.com/file/d/1UGnnCcb3ICpwzEDie0UesC-lykzRSubY/view?usp=sharing
   //https://drive.google.com/file/d/16LaSC2fL5e385sOUCcczqcrmshQy-cH2/view?usp=sharing
   //https://drive.google.com/file/d/1EP1frl1clu7aD0LrciLn34ygeBiizTRp/view?usp=sharing
   //https://drive.google.com/file/d/1WToRd6qp36r2BcyHbtP0HRK1CLu5IuL0/view?usp=sharing
+  //https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg
 
   // imageUrl= 'https://drive.google.com/file/d/1o-mLs8lvuPSbrlLRPyVLw1UqZwMGZIk5/view?usp=sharing';
   // imageUrl= 'https://drive.google.com/file/d/1o-mLs8lvuPSbrlLRPyVLw1UqZwMGZIk5/view?usp=sharing';
