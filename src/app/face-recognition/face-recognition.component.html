@@ -2,8 +2,59 @@
   <h2 class="title">Face Recognition</h2>
 
   <div class="upload-section">
-    <!-- <input type="file" (change)="onFileSelected($event)" accept="image/*" /> -->
-    <button class="submit-btn" (click)="submit()">Submit</button>
+    <div class="btn-container">
+      <button class="cssbuttons-io-button" (click)="openUploader()">
+        Upload Image
+        <div class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              fill="currentColor"
+              d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+            ></path>
+          </svg>
+        </div>
+      </button>
+      <button class="cssbuttons-io-button" (click)="submit()">
+        Submit
+        <div class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              fill="currentColor"
+              d="M21 5v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM8 7v10l5-5-5-5zm2-2h4v4h-4z"
+            ></path>
+          </svg>
+        </div>
+      </button>
+      <button class="cssbuttons-io-button" (click)="submitAnother()">
+        Submit Another
+        <div class="icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              fill="currentColor"
+              d="M21 12l-6.4-4.8v3.7H3v1.6h11.6v3.7L21 12z"
+            ></path>
+          </svg>
+        </div>
+      </button>
+    </div>
   </div>
 
   <div class="media-section">
@@ -14,28 +65,13 @@
       alt="Uploaded Image"
     />
     <div class="description-section">
-      <div *ngFor="let face of faceData" class="face-info">
+      <div class="face-info">
         <p class="info-title">Face Info:</p>
-        <p>
-          <span class="attribute">Face Rectangle:</span>
-          {{ face.faceRectangle | json }}
-        </p>
-        <p><span class="attribute">Glasses:</span> {{ face.glasses }}</p>
-        <p>
-          <span class="attribute">Headpose:</span> {{ face.headpose | json }}
-        </p>
-        <p><span class="attribute">Noise:</span> {{ face.noise | json }}</p>
-        <p><span class="attribute">Blur:</span> {{ face.blur | json }}</p>
-        <p>
-          <span class="attribute">Exposure:</span> {{ face.exposure | json }}
-        </p>
-        <p>
-          <span class="attribute">Occulsion:</span> {{ face.occulsion | json }}
-        </p>
-        <p>
-          <span class="attribute">Accessories:</span>
-          {{ face.accessories | json }}
-        </p>
+        <table class="attribute-table">
+          <tbody>
+            <!-- Face attribute display section -->
+          </tbody>
+        </table>
         <hr class="divider" />
       </div>
     </div>
