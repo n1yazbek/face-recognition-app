@@ -46,14 +46,6 @@
             >
               <i class="fas fa-search"></i> Analyze the Face
             </button>
-            <!-- Submit Another Button -->
-            <button
-              class="btn btn-warning"
-              (click)="submitAnother()"
-              [disabled]="!faceData"
-            >
-              <i class="fas fa-redo"></i> Submit Another
-            </button>
           </div>
           <div class="form-group">
             <label for="personName">Person's Name:</label>
@@ -71,82 +63,94 @@
         <div class="col-md-6">
           <h2 class="mb-4">Analysis Results</h2>
           <div class="face-info">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Attribute</th>
-                  <th scope="col">Value</th>
-                </tr>
-              </thead>
+            <div class="card">
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Attribute</th>
+                      <th scope="col">Value</th>
+                    </tr>
+                  </thead>
 
-              <tbody>
-                <tr>
-                  <td>Face ID:</td>
-                  <td>
-                    <ng-container *ngIf="faceData.length; else defaultTemplate">
-                      <span *ngFor="let face of faceData">{{
-                        face?.faceId || "N/A"
-                      }}</span>
-                    </ng-container>
-                    <ng-template #defaultTemplate>N/A</ng-template>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Age:</td>
-                  <td>
-                    <ng-container
-                      *ngIf="faceData.length; else defaultTemplateAge"
-                    >
-                      <span *ngFor="let face of faceData"
-                        >{{ face?.age?.low || "N/A" }} -
-                        {{ face?.age?.high || "N/A" }}</span
-                      >
-                    </ng-container>
-                    <ng-template #defaultTemplateAge>N/A</ng-template>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Gender:</td>
-                  <td>
-                    <ng-container
-                      *ngIf="faceData.length; else defaultTemplateGender"
-                    >
-                      <span *ngFor="let face of faceData">{{
-                        face?.gender?.gender || "N/A"
-                      }}</span>
-                    </ng-container>
-                    <ng-template #defaultTemplateGender>N/A</ng-template>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Gender Probability:</td>
-                  <td>
-                    <ng-container
-                      *ngIf="faceData.length; else defaultTemplateGenderProb"
-                    >
-                      <span *ngFor="let face of faceData">{{
-                        face?.gender?.probability || "N/A"
-                      }}</span>
-                    </ng-container>
-                    <ng-template #defaultTemplateGenderProb>N/A</ng-template>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Glasses:</td>
-                  <td>
-                    <ng-container
-                      *ngIf="faceData.length; else defaultTemplateGlasses"
-                    >
-                      <span *ngFor="let face of faceData">{{
-                        face?.glasses || "N/A"
-                      }}</span>
-                    </ng-container>
-                    <ng-template #defaultTemplateGlasses>N/A</ng-template>
-                  </td>
-                </tr>
-                <!-- Add more rows for other face attributes -->
-              </tbody>
-            </table>
+                  <tbody>
+                    <tr>
+                      <td>Face ID:</td>
+                      <td>
+                        <ng-container
+                          *ngIf="faceData.length; else defaultTemplate"
+                        >
+                          <span *ngFor="let face of faceData">{{
+                            face?.faceId || "N/A"
+                          }}</span>
+                        </ng-container>
+                        <ng-template #defaultTemplate>N/A</ng-template>
+                      </td>
+                    </tr>
+                    <!-- Rest of your rows -->
+                    <tr>
+                      <td>Age:</td>
+                      <td>
+                        <ng-container
+                          *ngIf="faceData.length; else defaultTemplateAge"
+                        >
+                          <span *ngFor="let face of faceData">
+                            {{ face?.age?.low || "N/A" }} -
+                            {{ face?.age?.high || "N/A" }}
+                          </span>
+                        </ng-container>
+                        <ng-template #defaultTemplateAge>N/A</ng-template>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Gender:</td>
+                      <td>
+                        <ng-container
+                          *ngIf="faceData.length; else defaultTemplateGender"
+                        >
+                          <span *ngFor="let face of faceData">{{
+                            face?.gender?.gender || "N/A"
+                          }}</span>
+                        </ng-container>
+                        <ng-template #defaultTemplateGender>N/A</ng-template>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Gender Probability:</td>
+                      <td>
+                        <ng-container
+                          *ngIf="
+                            faceData.length;
+                            else defaultTemplateGenderProb
+                          "
+                        >
+                          <span *ngFor="let face of faceData">{{
+                            face?.gender?.probability || "N/A"
+                          }}</span>
+                        </ng-container>
+                        <ng-template #defaultTemplateGenderProb
+                          >N/A</ng-template
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Glasses:</td>
+                      <td>
+                        <ng-container
+                          *ngIf="faceData.length; else defaultTemplateGlasses"
+                        >
+                          <span *ngFor="let face of faceData">{{
+                            face?.glasses || "N/A"
+                          }}</span>
+                        </ng-container>
+                        <ng-template #defaultTemplateGlasses>N/A</ng-template>
+                      </td>
+                    </tr>
+                    <!-- Add more rows for other face attributes -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
