@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { FaceDetectionService } from '../face-detection.service';
 import { FaceRecognitionPlusService } from '../face-recognition-plus.service';
-
 import { environment } from 'src/environments/environment';
 
 
@@ -41,10 +40,7 @@ export class FaceRecognitionComponent {
 
   private endpoint = 'https://face-api-v2.cognitiveservices.azure.com/face/v1.0'; // Replace with your Face API endpoint
   private subscriptionKey = 'b0149ff724c44500bc5916e1342db560'; // Replace with your Face API subscription key
-  // private personGroupId = 'students'; // Replace with your desired person group ID
-  // private userGroupId = 'Lab2 students'; // Replace with your desired user group ID
   personName = ''; // Replace with your desired person name
-  private faceSetToken!: string; // To hold the FaceSet token
 
 
 
@@ -63,13 +59,16 @@ export class FaceRecognitionComponent {
     inputElement.accept = 'image/*';
     inputElement.onchange = (event) => this.onFileSelected(event);
     inputElement.click();
+    
   }
 
   onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
+      this.resetFields();
       this.selectedFile = inputElement.files[0];
       this.imageUrl = URL.createObjectURL(this.selectedFile);
+      
     }
   }
 
@@ -78,6 +77,7 @@ export class FaceRecognitionComponent {
     this.cloudinaryService.uploadFile(file)
       .then((result: any) => {
         console.log('File uploaded successfully');
+        this.resetFields();
         const fileUrl = result.secure_url;
         console.log('File URL:', fileUrl);
         this.imageUrl = fileUrl;
@@ -89,125 +89,6 @@ export class FaceRecognitionComponent {
       });
   }
 
-
-//   detectFaces(imageUrl: string) {
-//     this.faceDetectionService.detectFaces(imageUrl)
-//       .then(faceDetectionResponse => {
-//         console.log('Detected faces:', faceDetectionResponse);
-//         const detectedFaces = faceDetectionResponse.data.detected_faces;
-
-
-//         const faceIds = detectedFaces.map((face: { faceId: any; }) => face.faceId);
-  
-//         const msFaceUrl = `${this.endpoint}/detect`;
-//         const msFaceHeaders = new HttpHeaders({
-//           'Content-Type': 'application/json',
-//           'Ocp-Apim-Subscription-Key': this.subscriptionKey
-//         });
-//         const msFaceParams = { returnFaceAttributes: 'blur,exposure,noise,glasses,accessories,occlusion,headpose' };
-//         const msFaceBody = { url: imageUrl };
-  
-//         this.httpClient.post<any[]>(msFaceUrl, msFaceBody, { headers: msFaceHeaders, params: msFaceParams })
-//           .subscribe({
-//             next: (msFaceResponse: any[]) => {
-              
-//               const faceData = detectedFaces.map((face: any, index: number) => {
-//                 console.log('detected faces', detectedFaces);
-//                 // const age = {
-//                 //   low: face.Age["Age-Range"]["Low"],
-//                 //   high: face.Age["Age-Range"]["High"]
-//                 // }
-//                 const age = {
-//                   low: (face.Age["Age-Range"] as { Low: number }).Low,
-//                   high: (face.Age["Age-Range"] as { High: number }).High
-//                 };
-
-//                 const gender = {
-//                   gender: face.Gender["Gender"],
-//                   probability: face.Gender["Probability"]
-//                 }
-
-                
-                
-             
-//                 const msFace = msFaceResponse.find((f: any) => f.faceId === face.faceId);
-
-//                 const faceRectangle = msFace?.faceRectangle;
-//                 const glasses = msFace?.faceAttributes?.glasses;
-//                 const headpose = msFace?.faceAttributes?.headpose;
-//                 const noise = msFace?.faceAttributes?.noise;
-//                 const blur = msFace?.faceAttributes?.blur;
-//                 const exposure = msFace?.faceAttributes?.exposure;
-//                 const occulsion = msFace?.faceAttributes?.occlusion;
-//                 const accessories = msFace?.faceAttributes?.accessories;
-//                 const faceId = msFace?.faceAttributes?.faceId;
-  
-//                 return {
-//                   age,
-//                   gender,
-                  
-//                   faceId,
-//                   faceRectangle,
-//                   glasses,
-//                   headpose,
-//                   noise,
-//                   blur,
-//                   exposure,
-//                   occulsion,
-//                   accessories,
-//                 };
-//               });
-  
-//               this.faceData = faceData;
-//               console.log(this.faceData);
-//              // Create a FaceSet when face data is received
-//              this.faceRecognitionPlusService.createFaceSet(this.personName)
-//              .subscribe({
-//                next: (createFaceSetResponse) => {
-//                  console.log('Created FaceSet:', createFaceSetResponse);
-
-//                  const faceSetToken = createFaceSetResponse.faceset_token;
-//                  const faceTokens = this.faceData.map(face => face.faceId);
-
-//                  // Add the detected face(s) to the FaceSet
-//                  this.faceRecognitionPlusService.addFaceToFaceSet(faceTokens, faceSetToken)
-//                    .subscribe({
-//                      next: (addFaceToFaceSetResponse) => {
-//                        console.log('Added face to FaceSet:', addFaceToFaceSetResponse);
-
-//                        // Train the FaceSet with the newly added face(s)
-//                        this.faceRecognitionPlusService.trainFaceSet(faceSetToken)
-//                          .subscribe({
-//                            next: (trainFaceSetResponse) => {
-//                              console.log('Trained FaceSet:', trainFaceSetResponse);
-//                            },
-//                            error: (error) => {
-//                              console.error('Face++ Train FaceSet request failed:', error);
-//                            }
-//                          });
-//                      },
-//                      error: (error) => {
-//                        console.error('Face++ Add Face to FaceSet request failed:', error);
-//                      }
-//                    });
-//                },
-//                error: (error) => {
-//                  console.error('Face++ Create FaceSet request failed:', error);
-//                }
-//              });
-//          },
-//          error: (error) => {
-//            console.error('MS Face API request failed:', error);
-//            this.faceData = []; // Reset face data in case of an error
-//          }
-//        });
-//    })
-//    .catch(error => {
-//      console.error('Face Detection API request failed: here is the error', error);
-//      this.faceData = []; // Reset face data in case of an error
-//    });
-// }
-  
   
 detectFaces(imageUrl: string) {
   // alert('Detected Face');
@@ -220,7 +101,7 @@ console.log('ENVIRONMENT  keys', environment.facePlusPlus.apiKey, environment.fa
       console.log(this.faceData);
 
       // Create a FaceSet when face data is received
-      this.createAndTrainFaceSet(faceData);
+      // this.createAndTrainFaceSet(faceData);
     })
     .catch(error => {
       console.error('Face Detection API request failed: here is the error', error);
@@ -320,18 +201,33 @@ console.log('person Name', this.personName);
   
 
   submit() {
-    // if (this.selectedFile && this.personName && this.personName.trim() !== '') {
-    //   this.uploadAndDetectFaces(this.selectedFile);
-    // } else {
-    //   alert('Please select an image and enter a person name.');
-    // }
-
     if(this.selectedFile){
       this.uploadAndDetectFaces(this.selectedFile);
+      this.resetFields();
     }else{
       ('Please select an image');
     }
   }
+
+  resetFields(): void {
+    this.faceData = [
+      {
+        faceId: "N/A",
+        faceRectangle: [0, 0, 0, 0],
+        glasses: "N/A",
+        headpose: [0, 0, 0],
+        noise: ["N/A", 0],
+        blur: ["N/A", 0],
+        exposure: ["N/A", 0],
+        occulsion: [false, false, false],
+        accessories: ["N/A", 0],
+        age: { low: 0, high: 0 },
+        gender: { gender: "N/A", probability: 0 },
+      },
+    ];
+  }
+  
+  
   
   submitAnother() {
     // Reset the image URL, face data, and person name to prepare for another submission
@@ -340,10 +236,4 @@ console.log('person Name', this.personName);
     this.personName = '';
   }
   
-
-  // Training phase methods
-
-  // Recognition phase method
-
-
 }             
