@@ -47,7 +47,7 @@ export class FaceRecognitionComponent {
   constructor(private httpClient: HttpClient,
       private cloudinaryService: CloudinaryService, 
       private faceDetectionService : FaceDetectionService,
-      private faceRecognitionPlusService: FaceRecognitionPlusService
+      // private faceRecognitionPlusService: FaceRecognitionPlusService
       ) {}
 
 
@@ -157,45 +157,45 @@ mapFaceData(detectedFaces: any[], msFaceData: any[]): FaceData[] {
   });
 }
 
-createAndTrainFaceSet(faceData: FaceData[]) {
-  // alert('Detected Face');
-// console.log('ENVIRONMENT  keys', environment.facePlusPlus.apiKey, environment.facePlusPlus.apiSecret, environment.facePlusPlus.endpoint);
-console.log('person Name', this.personName);
-  this.faceRecognitionPlusService.createFaceSet(this.personName)
-    .subscribe({
-      next: (createFaceSetResponse) => {
-        console.log('Created FaceSet:', createFaceSetResponse);
+// createAndTrainFaceSet(faceData: FaceData[]) {
+//   // alert('Detected Face');
+// // console.log('ENVIRONMENT  keys', environment.facePlusPlus.apiKey, environment.facePlusPlus.apiSecret, environment.facePlusPlus.endpoint);
+// console.log('person Name', this.personName);
+//   this.faceRecognitionPlusService.createFaceSet(this.personName)
+//     .subscribe({
+//       next: (createFaceSetResponse) => {
+//         console.log('Created FaceSet:', createFaceSetResponse);
 
-        const faceSetToken = createFaceSetResponse.faceset_token;
-        const faceTokens = faceData.map(face => face.faceId);
+//         const faceSetToken = createFaceSetResponse.faceset_token;
+//         const faceTokens = faceData.map(face => face.faceId);
 
-        // Add the detected face(s) to the FaceSet
-        this.faceRecognitionPlusService.addFaceToFaceSet(faceTokens, faceSetToken)
-          .subscribe({
-            next: (addFaceToFaceSetResponse) => {
-              console.log('Added face to FaceSet:', addFaceToFaceSetResponse);
+//         // Add the detected face(s) to the FaceSet
+//         this.faceRecognitionPlusService.addFaceToFaceSet(faceTokens, faceSetToken)
+//           .subscribe({
+//             next: (addFaceToFaceSetResponse) => {
+//               console.log('Added face to FaceSet:', addFaceToFaceSetResponse);
 
-              // Train the FaceSet with the newly added face(s)
-              this.faceRecognitionPlusService.trainFaceSet(faceSetToken)
-                .subscribe({
-                  next: (trainFaceSetResponse) => {
-                    console.log('Trained FaceSet:', trainFaceSetResponse);
-                  },
-                  error: (error) => {
-                    console.error('Face++ Train FaceSet request failed:', error);
-                  }
-                });
-            },
-            error: (error) => {
-              console.error('Face++ Add Face to FaceSet request failed:', error);
-            }
-          });
-      },
-      error: (error) => {
-        console.error('Face++ Create FaceSet request failed:', error);
-      }
-    });
-}
+//               // Train the FaceSet with the newly added face(s)
+//               this.faceRecognitionPlusService.trainFaceSet(faceSetToken)
+//                 .subscribe({
+//                   next: (trainFaceSetResponse) => {
+//                     console.log('Trained FaceSet:', trainFaceSetResponse);
+//                   },
+//                   error: (error) => {
+//                     console.error('Face++ Train FaceSet request failed:', error);
+//                   }
+//                 });
+//             },
+//             error: (error) => {
+//               console.error('Face++ Add Face to FaceSet request failed:', error);
+//             }
+//           });
+//       },
+//       error: (error) => {
+//         console.error('Face++ Create FaceSet request failed:', error);
+//       }
+//     });
+// }
 
 
   
@@ -225,15 +225,6 @@ console.log('person Name', this.personName);
         gender: { gender: "N/A", probability: 0 },
       },
     ];
-  }
-  
-  
-  
-  submitAnother() {
-    // Reset the image URL, face data, and person name to prepare for another submission
-    this.imageUrl = '';
-    this.faceData = [];
-    this.personName = '';
   }
   
 }             
