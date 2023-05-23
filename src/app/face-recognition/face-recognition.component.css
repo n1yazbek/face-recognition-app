@@ -347,3 +347,59 @@
     stroke-dashoffset: -124px;
   }
 }
+
+
+.face-results {
+  overflow: hidden;
+  position: relative;
+}
+
+.swipe-container {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.swipe-item {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 20px;
+  scroll-snap-align: center;
+}
+
+/* Additional styling for table and table rows */
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  background-color: transparent;
+}
+
+.table td {
+  border-top: none;
+}
+
+/* Hide horizontal scrollbar */
+.swipe-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  border-top-color: #333;
+  animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

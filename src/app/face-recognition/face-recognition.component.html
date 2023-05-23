@@ -60,6 +60,7 @@
         </div>
 
         <!-- Right column for analysis results -->
+        <!-- Right column for analysis results -->
         <div class="col-md-6">
           <h2 class="mb-4">Analysis Results</h2>
           <div class="face-info">
@@ -74,13 +75,11 @@
                   </thead>
 
                   <tbody>
-                    <tr>
-                      <td>Face ID:</td>
-                      <td>
-                        <ng-container
-                          *ngIf="faceData.length; else defaultTemplate"
-                        >
-                          <span *ngFor="let face of faceData">
+                    <ng-container *ngFor="let face of faceData; let i = index">
+                      <tr>
+                        <td>Face ID:</td>
+                        <td>
+                          <div class="result-container">
                             <div class="ring" *ngIf="loading">
                               <svg viewBox="25 25 50 50">
                                 <circle
@@ -95,31 +94,13 @@
                             <span *ngIf="!loading">{{
                               face?.faceId || "N/A"
                             }}</span>
-                          </span>
-                        </ng-container>
-                        <ng-template #defaultTemplate>
-                          <div class="ring" *ngIf="loading">
-                            <svg viewBox="25 25 50 50">
-                              <circle
-                                cx="50"
-                                cy="50"
-                                r="20"
-                                fill="none"
-                                stroke-width="2"
-                              ></circle>
-                            </svg>
                           </div>
-                          <span *ngIf="!loading">N/A</span>
-                        </ng-template>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Age:</td>
-                      <td>
-                        <ng-container
-                          *ngIf="faceData.length; else defaultTemplateAge"
-                        >
-                          <span *ngFor="let face of faceData">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Age:</td>
+                        <td>
+                          <div class="result-container">
                             <div class="ring" *ngIf="loading">
                               <svg viewBox="25 25 50 50">
                                 <circle
@@ -135,31 +116,13 @@
                               >{{ face?.age?.low || "N/A" }} -
                               {{ face?.age?.high || "N/A" }}</span
                             >
-                          </span>
-                        </ng-container>
-                        <ng-template #defaultTemplateAge>
-                          <div class="ring" *ngIf="loading">
-                            <svg viewBox="25 25 50 50">
-                              <circle
-                                cx="50"
-                                cy="50"
-                                r="20"
-                                fill="none"
-                                stroke-width="2"
-                              ></circle>
-                            </svg>
                           </div>
-                          <span *ngIf="!loading">N/A</span>
-                        </ng-template>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Gender:</td>
-                      <td>
-                        <ng-container
-                          *ngIf="faceData.length; else defaultTemplateGender"
-                        >
-                          <span *ngFor="let face of faceData">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gender:</td>
+                        <td>
+                          <div class="result-container">
                             <div class="ring" *ngIf="loading">
                               <svg viewBox="25 25 50 50">
                                 <circle
@@ -174,34 +137,13 @@
                             <span *ngIf="!loading">{{
                               face?.gender?.gender || "N/A"
                             }}</span>
-                          </span>
-                        </ng-container>
-                        <ng-template #defaultTemplateGender>
-                          <div class="ring" *ngIf="loading">
-                            <svg viewBox="25 25 50 50">
-                              <circle
-                                cx="50"
-                                cy="50"
-                                r="20"
-                                fill="none"
-                                stroke-width="2"
-                              ></circle>
-                            </svg>
                           </div>
-                          <span *ngIf="!loading">N/A</span>
-                        </ng-template>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Gender Probability:</td>
-                      <td>
-                        <ng-container
-                          *ngIf="
-                            faceData.length;
-                            else defaultTemplateGenderProb
-                          "
-                        >
-                          <span *ngFor="let face of faceData">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Gender Probability:</td>
+                        <td>
+                          <div class="result-container">
                             <div class="ring" *ngIf="loading">
                               <svg viewBox="25 25 50 50">
                                 <circle
@@ -216,31 +158,13 @@
                             <span *ngIf="!loading">{{
                               face?.gender?.probability || "N/A"
                             }}</span>
-                          </span>
-                        </ng-container>
-                        <ng-template #defaultTemplateGenderProb>
-                          <div class="ring" *ngIf="loading">
-                            <svg viewBox="25 25 50 50">
-                              <circle
-                                cx="50"
-                                cy="50"
-                                r="20"
-                                fill="none"
-                                stroke-width="2"
-                              ></circle>
-                            </svg>
                           </div>
-                          <span *ngIf="!loading">N/A</span>
-                        </ng-template>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Glasses:</td>
-                      <td>
-                        <ng-container
-                          *ngIf="faceData.length; else defaultTemplateGlasses"
-                        >
-                          <span *ngFor="let face of faceData">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Glasses:</td>
+                        <td>
+                          <div class="result-container">
                             <div class="ring" *ngIf="loading">
                               <svg viewBox="25 25 50 50">
                                 <circle
@@ -255,24 +179,14 @@
                             <span *ngIf="!loading">{{
                               face?.glasses || "N/A"
                             }}</span>
-                          </span>
-                        </ng-container>
-                        <ng-template #defaultTemplateGlasses>
-                          <div class="ring" *ngIf="loading">
-                            <svg viewBox="25 25 50 50">
-                              <circle
-                                cx="50"
-                                cy="50"
-                                r="20"
-                                fill="none"
-                                stroke-width="2"
-                              ></circle>
-                            </svg>
                           </div>
-                          <span *ngIf="!loading">N/A</span>
-                        </ng-template>
-                      </td>
-                    </tr>
+                        </td>
+                      </tr>
+                      <tr *ngIf="i < faceData.length - 1">
+                        <td colspan="2" class="spacer"></td>
+                      </tr>
+                    </ng-container>
+
                     <!-- Add more rows for other face attributes -->
                   </tbody>
                 </table>

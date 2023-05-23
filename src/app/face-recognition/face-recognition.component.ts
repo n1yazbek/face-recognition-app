@@ -42,6 +42,7 @@ export class FaceRecognitionComponent {
   private subscriptionKey = 'b0149ff724c44500bc5916e1342db560'; // Replace with your Face API subscription key
   personName = ''; // Replace with your desired person name
   loading: boolean = false;
+  currentCardIndex: number = 0;
 
 
   constructor(private httpClient: HttpClient,
@@ -234,6 +235,19 @@ mapFaceData(detectedFaces: any[], msFaceData: any[]): FaceData[] {
         gender: { gender: "N/A", probability: 0 },
       },
     ];
+  }
+
+
+  prevCard(): void {
+    if (this.currentCardIndex > 0) {
+      this.currentCardIndex--;
+    }
+  }
+
+  nextCard(): void {
+    if (this.currentCardIndex < this.faceData.length - 1) {
+      this.currentCardIndex++;
+    }
   }
   
 }             
