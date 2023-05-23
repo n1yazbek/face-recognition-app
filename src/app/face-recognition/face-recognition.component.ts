@@ -41,7 +41,7 @@ export class FaceRecognitionComponent {
   private endpoint = 'https://face-api-v2.cognitiveservices.azure.com/face/v1.0'; // Replace with your Face API endpoint
   private subscriptionKey = 'b0149ff724c44500bc5916e1342db560'; // Replace with your Face API subscription key
   personName = ''; // Replace with your desired person name
-
+  loading: boolean = false;
 
 
   constructor(private httpClient: HttpClient,
@@ -108,23 +108,31 @@ console.log('ENVIRONMENT  keys', environment.facePlusPlus.apiKey, environment.fa
       this.faceData = []; // Reset face data in case of an error
     });
 }
-
 async detectAndFetchFaceData(imageUrl: string): Promise<[any[], any[]]> {
-  const faceDetectionResponse = await this.faceDetectionService.detectFaces(imageUrl);
-  console.log('Detected faces:', faceDetectionResponse);
-  const detectedFaces = faceDetectionResponse.data.detected_faces;
-  
-  const msFaceUrl = `${this.endpoint}/detect`;
-  const msFaceHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Ocp-Apim-Subscription-Key': this.subscriptionKey
-  });
-  const msFaceParams = { returnFaceAttributes: 'blur,exposure,noise,glasses,accessories,occlusion,headpose' };
-  const msFaceBody = { url: imageUrl };
-  const msFaceResponse = await this.httpClient.post<any[]>(msFaceUrl, msFaceBody, { headers: msFaceHeaders, params: msFaceParams }).toPromise();
-  
-  return [detectedFaces, msFaceResponse || []];
+  try {
+    const faceDetectionResponse = await this.faceDetectionService.detectFaces(imageUrl);
+    console.log('Detected faces:', faceDetectionResponse);
+    const detectedFaces = faceDetectionResponse.data.detected_faces;
+
+    const msFaceUrl = `${this.endpoint}/detect`;
+    const msFaceHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Ocp-Apim-Subscription-Key': this.subscriptionKey
+    });
+    const msFaceParams = { returnFaceAttributes: 'blur,exposure,noise,glasses,accessories,occlusion,headpose' };
+    const msFaceBody = { url: imageUrl };
+    const msFaceResponse = await this.httpClient.post<any[]>(msFaceUrl, msFaceBody, { headers: msFaceHeaders, params: msFaceParams }).toPromise();
+
+    return [detectedFaces, msFaceResponse || []];
+  } catch (error) {
+    console.error('Face Detection API request failed:', error);
+    this.faceData = []; // Reset face data in case of an error
+    return [[], []];
+  } finally {
+    this.loading = false; // Hide the loader
+  }
 }
+  
 
 
 mapFaceData(detectedFaces: any[], msFaceData: any[]): FaceData[] {
@@ -202,6 +210,7 @@ mapFaceData(detectedFaces: any[], msFaceData: any[]): FaceData[] {
 
   submit() {
     if(this.selectedFile){
+      this.loading = true;
       this.uploadAndDetectFaces(this.selectedFile);
       this.resetFields();
     }else{

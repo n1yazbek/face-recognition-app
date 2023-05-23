@@ -80,14 +80,39 @@
                         <ng-container
                           *ngIf="faceData.length; else defaultTemplate"
                         >
-                          <span *ngFor="let face of faceData">{{
-                            face?.faceId || "N/A"
-                          }}</span>
+                          <span *ngFor="let face of faceData">
+                            <div class="ring" *ngIf="loading">
+                              <svg viewBox="25 25 50 50">
+                                <circle
+                                  cx="50"
+                                  cy="50"
+                                  r="20"
+                                  fill="none"
+                                  stroke-width="2"
+                                ></circle>
+                              </svg>
+                            </div>
+                            <span *ngIf="!loading">{{
+                              face?.faceId || "N/A"
+                            }}</span>
+                          </span>
                         </ng-container>
-                        <ng-template #defaultTemplate>N/A</ng-template>
+                        <ng-template #defaultTemplate>
+                          <div class="ring" *ngIf="loading">
+                            <svg viewBox="25 25 50 50">
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="20"
+                                fill="none"
+                                stroke-width="2"
+                              ></circle>
+                            </svg>
+                          </div>
+                          <span *ngIf="!loading">N/A</span>
+                        </ng-template>
                       </td>
                     </tr>
-                    <!-- Rest of your rows -->
                     <tr>
                       <td>Age:</td>
                       <td>
@@ -95,11 +120,37 @@
                           *ngIf="faceData.length; else defaultTemplateAge"
                         >
                           <span *ngFor="let face of faceData">
-                            {{ face?.age?.low || "N/A" }} -
-                            {{ face?.age?.high || "N/A" }}
+                            <div class="ring" *ngIf="loading">
+                              <svg viewBox="25 25 50 50">
+                                <circle
+                                  cx="50"
+                                  cy="50"
+                                  r="20"
+                                  fill="none"
+                                  stroke-width="2"
+                                ></circle>
+                              </svg>
+                            </div>
+                            <span *ngIf="!loading"
+                              >{{ face?.age?.low || "N/A" }} -
+                              {{ face?.age?.high || "N/A" }}</span
+                            >
                           </span>
                         </ng-container>
-                        <ng-template #defaultTemplateAge>N/A</ng-template>
+                        <ng-template #defaultTemplateAge>
+                          <div class="ring" *ngIf="loading">
+                            <svg viewBox="25 25 50 50">
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="20"
+                                fill="none"
+                                stroke-width="2"
+                              ></circle>
+                            </svg>
+                          </div>
+                          <span *ngIf="!loading">N/A</span>
+                        </ng-template>
                       </td>
                     </tr>
                     <tr>
@@ -108,11 +159,37 @@
                         <ng-container
                           *ngIf="faceData.length; else defaultTemplateGender"
                         >
-                          <span *ngFor="let face of faceData">{{
-                            face?.gender?.gender || "N/A"
-                          }}</span>
+                          <span *ngFor="let face of faceData">
+                            <div class="ring" *ngIf="loading">
+                              <svg viewBox="25 25 50 50">
+                                <circle
+                                  cx="50"
+                                  cy="50"
+                                  r="20"
+                                  fill="none"
+                                  stroke-width="2"
+                                ></circle>
+                              </svg>
+                            </div>
+                            <span *ngIf="!loading">{{
+                              face?.gender?.gender || "N/A"
+                            }}</span>
+                          </span>
                         </ng-container>
-                        <ng-template #defaultTemplateGender>N/A</ng-template>
+                        <ng-template #defaultTemplateGender>
+                          <div class="ring" *ngIf="loading">
+                            <svg viewBox="25 25 50 50">
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="20"
+                                fill="none"
+                                stroke-width="2"
+                              ></circle>
+                            </svg>
+                          </div>
+                          <span *ngIf="!loading">N/A</span>
+                        </ng-template>
                       </td>
                     </tr>
                     <tr>
@@ -124,13 +201,37 @@
                             else defaultTemplateGenderProb
                           "
                         >
-                          <span *ngFor="let face of faceData">{{
-                            face?.gender?.probability || "N/A"
-                          }}</span>
+                          <span *ngFor="let face of faceData">
+                            <div class="ring" *ngIf="loading">
+                              <svg viewBox="25 25 50 50">
+                                <circle
+                                  cx="50"
+                                  cy="50"
+                                  r="20"
+                                  fill="none"
+                                  stroke-width="2"
+                                ></circle>
+                              </svg>
+                            </div>
+                            <span *ngIf="!loading">{{
+                              face?.gender?.probability || "N/A"
+                            }}</span>
+                          </span>
                         </ng-container>
-                        <ng-template #defaultTemplateGenderProb
-                          >N/A</ng-template
-                        >
+                        <ng-template #defaultTemplateGenderProb>
+                          <div class="ring" *ngIf="loading">
+                            <svg viewBox="25 25 50 50">
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="20"
+                                fill="none"
+                                stroke-width="2"
+                              ></circle>
+                            </svg>
+                          </div>
+                          <span *ngIf="!loading">N/A</span>
+                        </ng-template>
                       </td>
                     </tr>
                     <tr>
@@ -139,11 +240,37 @@
                         <ng-container
                           *ngIf="faceData.length; else defaultTemplateGlasses"
                         >
-                          <span *ngFor="let face of faceData">{{
-                            face?.glasses || "N/A"
-                          }}</span>
+                          <span *ngFor="let face of faceData">
+                            <div class="ring" *ngIf="loading">
+                              <svg viewBox="25 25 50 50">
+                                <circle
+                                  cx="50"
+                                  cy="50"
+                                  r="20"
+                                  fill="none"
+                                  stroke-width="2"
+                                ></circle>
+                              </svg>
+                            </div>
+                            <span *ngIf="!loading">{{
+                              face?.glasses || "N/A"
+                            }}</span>
+                          </span>
                         </ng-container>
-                        <ng-template #defaultTemplateGlasses>N/A</ng-template>
+                        <ng-template #defaultTemplateGlasses>
+                          <div class="ring" *ngIf="loading">
+                            <svg viewBox="25 25 50 50">
+                              <circle
+                                cx="50"
+                                cy="50"
+                                r="20"
+                                fill="none"
+                                stroke-width="2"
+                              ></circle>
+                            </svg>
+                          </div>
+                          <span *ngIf="!loading">N/A</span>
+                        </ng-template>
                       </td>
                     </tr>
                     <!-- Add more rows for other face attributes -->

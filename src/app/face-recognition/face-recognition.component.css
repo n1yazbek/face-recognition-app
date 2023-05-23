@@ -4,6 +4,7 @@
   padding: 20px;
 }
 
+
 .title {
   text-align: center;
   font-size: 24px;
@@ -271,3 +272,78 @@
   transform: scale(0.95);
 }
 
+.loader {
+  --uib-size: 40px;
+  --uib-speed: 1s;
+  --uib-color: black;
+  --uib-line-weight: 3.5px;
+
+  display: inline-block;
+  width: var(--uib-size);
+  height: var(--uib-size);
+}
+
+.loader::after {
+  content: "";
+  display: block;
+  width: var(--uib-line-weight);
+  height: calc(var(--uib-size) * 0.3);
+  background-color: var(--uib-color);
+  animation: loader-animation var(--uib-speed) infinite ease-in-out;
+}
+
+@keyframes loader-animation {
+  0%, 100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.loader.show {
+  display: inline-block;
+}
+
+
+
+.ring {
+  --uib-size: 40px; /* Adjust the size as desired */
+  --uib-speed: 2s;
+  --uib-color: black;
+  
+  height: var(--uib-size);
+  width: var(--uib-size);
+  vertical-align: middle;
+  transform-origin: center;
+  animation: rotate var(--uib-speed) linear infinite;
+}
+
+.ring circle {
+  fill: none;
+  stroke: var(--uib-color);
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: stretch calc(var(--uib-speed) * 0.75) ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes stretch {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -124px;
+  }
+}
